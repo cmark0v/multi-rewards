@@ -1,0 +1,14 @@
+Step 1/14 : FROM trufflesuite/ganache as build
+Step 2/14 : USER root
+Step 3/14 : from ubuntu:latest as main
+Step 4/14 : EXPOSE 8545
+Step 5/14 : COPY --from=build /app /app
+Step 6/14 : COPY --from=build /usr/local/bin /usr/local/bin
+Step 7/14 : RUN apt-get update -y --force-yes
+Step 8/14 : RUN apt-get upgrade -y --force-yes
+Step 9/14 : RUN apt-get --no-install-recommends -y --force-yes install  python3-pip python3-venv
+Step 10/14 : RUN pip3 install pipx
+Step 11/14 : RUN pipx install eth-brownie
+Step 12/14 : RUN pipx inject eth-brownie brownie-token-tester
+Step 13/14 : RUN echo "#!bin/bash" > /usr/local/bin/ganache-cli && echo "node /app/dist/node/cli.js $@" >> /usr/local/bin/ganache-cli&& chmod +x /usr/local/bin/ganache-cli
+Step 14/14 : ENV PATH=$PATH:/root/.local/bin:/bin:/usr/local/bin
