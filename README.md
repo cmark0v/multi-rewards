@@ -1,3 +1,13 @@
+
+
+
+docker container for test environment supplied
+``run/setup.sh`` builds the container
+``run/tests.sh`` runs the tests in said container
+
+
+----------------------------------------------------------------------------------
+
 # multi-rewards
 A modified version of the [Synthetix](https://github.com/Synthetixio/synthetix) staking rewards contract, allowing for multiple rewards tokens. Designed for use with [Curve.fi](https://github.com/curvefi) liquidity gauges.
 
