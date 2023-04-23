@@ -124,7 +124,7 @@ def test_reward_creation_transfers_balance(multi, reward_token, alice):
     multi.rewardData(reward_token)
     multi.notifyRewardAmount(reward_token, amount, {"from": alice})
     assert reward_token.balanceOf(alice) == 0
-    assert multi.rewardData(reward_token)["rewardRate"] == int(1e18)*amount // 60
+    assert multi.rewardData(reward_token)["rewardRate"] == amount // 60
 
 
 # Fail on insufficient balance
@@ -138,7 +138,7 @@ def test_reward_fail_on_insufficient_balance(multi, reward_token, alice):
 
 # Reward per duration accurate?  Should round off and return full amount
 def test_reward_per_duration(multi, reward_token, alice):
-    amount = int(1e18)*(10 ** 15)
+    amount = 10 ** 15
     reward_token.approve(multi, amount, {"from": alice})
     multi.setRewardsDistributor(reward_token, alice, {"from": alice})
     multi.notifyRewardAmount(reward_token, amount, {"from": alice})
