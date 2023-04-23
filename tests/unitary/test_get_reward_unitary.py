@@ -28,7 +28,7 @@ def test_multiuser_reward_per_token_paid(multi, reward_token, alice, chain):
     for i in range(5):
         last_val = multi.userRewardPerTokenPaid(alice, reward_token)
         multi.notifyRewardAmount(reward_token, 10 ** 10, {"from": alice})
-        chain.mine(timedelta=60)
+        chain.mine(timedelta=61)
         earnings = multi.earned(alice, reward_token)
         tx = multi.getReward()
         assert multi.userRewardPerTokenPaid(alice, reward_token) > last_val
