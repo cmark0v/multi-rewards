@@ -3,6 +3,7 @@
 export FF=`ls contracts/*.sol|head -n 1`
 export SOLC_VERSION=`grep -ow '\\^[0-9]\\.[0-9]\\.[0-9]\{1,2\}' $FF|cut -c 2-`
 export CFGFILES=brownie-config.yaml
+export CONTRACTS=`find contracts|grep \\.sol$`
 if [ $1 ]
 then
 echo "changing solc $SOLC_VERSION changing to $1"
@@ -17,13 +18,11 @@ then
     echo "change brownie"
     sed -i "s/pragma solidity \\^$SOLC_VERSION/pragma solidity \\^$CHK/" `find contracts/|grep \\.sol`
     echo "change contracts"
-    #sed -i "s/pragma solidity \\^$SOLC_VERSION/pragma solidity \\^$CHK/" contracts/*/*.sol
-    #echo "change libs"
-    export CHKLIB=`cat contracts/*/*.sol contracts/*.sol $CFGFILES|grep $CHK|wc -l`
-    export _COUNT=`ls contracts/*/*.sol contracts/*.sol $CFGFILES|wc -l`
+    export CHKLIB=`cat $CONTRACTS $CFGFILES|grep $CHK|wc -l`
+    export _COUNT=`ls $CONTRACTS $CFGFILES|wc -l`
     if [ $CHKLIB.eq.$_COUNT ]
     then
-        echo "looks g2g, all files updated"
+        echo "looks g2g, all files updated $CHKLIB"
     else
         echo "$CHKLIB out of $_COUNT files changes"
     fi
