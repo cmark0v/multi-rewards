@@ -1,9 +1,13 @@
+# changes
+
+- added docker containers for the test environment and helper scripts 
+- made minor modifications allowing eveything to work with solidity 0.8.19
+- de-flattened the contracts for more amicable devops
 
 
-
-docker container for test environment supplied
-``run/setup.sh`` builds the container
-``run/tests.sh`` runs the tests in said container
+to use setup repo and run tests:
+- ``run/setup.sh`` builds the container
+- ``run/tests.sh`` runs the tests in said container
 
 
 ----------------------------------------------------------------------------------
